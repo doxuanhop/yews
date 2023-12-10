@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Yews - tin tức cộng đồng công nghệ thông tin - news ict computer,mobile</title>
+</head>
+<body><xt:code><!--parser:xtscript-->
+var $intime = {{<xt:gentime round="7"/>}};
+var $cuttime = call substr $val=$intime; $start=4; $length=7;
+var $ingzip = ($cuttime/65000*100)
+var $ougzip = call round $num=$ingzip; $mode=PHP_ROUND_HALF_DOWN; $precision=1
+print {{Timeload : <xt:gentime round="4"/>/Giây<br/>Timeout: $ougzip%}}
+<!--/parser:xtscript--></xt:code>
+    
+</body>
+</html>

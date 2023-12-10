@@ -1,0 +1,53 @@
+#exportable
+function page $noidung=;$show=25000;
+get id
+var $url=/post?id=$id&p
+var $lnd = call strlen $val=$noidung
+if $lnd <= $show
+var $cut = $noidung
+endif
+if $lnd > $show
+var $nump = ($lnd/$show)
+var $nump = call ceil $num=$nump
+get p
+if $p ==
+var $p=1
+endif
+if $p > $nump
+var $p=$nump
+endif
+var $batdau =($p*$show-$show)
+var $cut = call substr $val=$noidung;$start=$batdau;$length=$show;
+if $p > 1
+var $dau = <a href="$url=1">1</a>
+var $prev = <a href="$url=($p-1)">&lt;&lt;</a>
+if $p > 2
+var $prevp = <a href="$url=($p-1)">($p-1)</a>
+if $p > 3
+var $prevvp = <a href="$url=($p-2)">($p-2)</a>
+if $p > 4
+var $dau = <a href="$url=1">1</a>...
+endif
+endif
+endif
+endif
+if $p < $nump
+var $next = <a href="$url=($p+1)">&gt;&gt;</a>
+var $cuoi = <a href="$url=$nump">$nump</a>
+if $p < ($nump-1)
+var $nextp = <a href="$url=($p+1)">($p+1)</a>
+if $p < ($nump-2)
+var $nexttp = <a href="$url=($p+2)">($p+2)</a>
+if $p < ($nump-3)
+var $cuoi = ...<a href="$url=$nump">$nump</a>
+endif
+endif
+endif
+endif
+print <div class="list1" style="align: center">$cut</div>
+var $page = $prev$dau$prevvp$prevp<span class="currentpage">$p</span>$nextp$nexttp$cuoi$next
+var $page = call str_replace $subject=$page; $search=...; $replace= ...&#32;
+if $lnd > $show
+print <div class="page">$page</div>
+endif
+endfunction

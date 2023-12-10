@@ -1,0 +1,62 @@
+#exportable
+function filelist $fi=-index
+var $model = <xt:get_device_template/>
+if $model == mobile
+var $per = 7
+endif
+if $model == web
+var $per = 10
+endif
+if $model == touch
+var $per = 10
+endif
+var $list = <xt:filelist sort_type="updated" sort_dir="desc" per_page="$per" folder="/data/" template="&lt;div class=&quot;view_item&quot;&gt;&lt;div class=&quot;vi_left&quot;&gt;&lt;img src=&quot;~img[.file_name.]~&quot; alt=&quot;~img[.file_name.]~&quot;/&gt;&lt;/div&gt;&lt;iiv class=&quot;vi_right&quot;&gt;&lt;span class=&quot;title&quot;&gt;&lt;a title=&quot;title[.file_name.]&quot; href=&quot;/post?id=.file_name.&quot;&gt;~dau~.file_name.&lt;/a&gt;~cuoi~&lt;/span&gt;&lt;p class=&quot;content&quot;&gt;~des[.file_name.]~&lt;/div&gt;" filter="$fi"/>
+@batdau
+assign $end=call strrpos $haystack=$list;$needle=~cuoi~; $offset=0
+assign $start=call strrpos $haystack=$list;$needle=~dau~; $offset=0
+var $getname = call substr $val=$list;$start=($start+5);$length=($end-$start-9);
+var $data = call source $file=/data/$getname
+assign $endt =call strpos $haystack=$data;$needle=[/ten]; $offset=0
+assign $startt=call strpos $haystack=$data;$needle=[ten]; $offset=0
+assign $endi=call strpos $haystack=$data;$needle=[/img]; $offset=0
+assign $starti=call strpos $haystack=$data;$needle=[img]; $offset=0
+assign $tenfile = $getname
+var $rename = call substr $val=$data;$start=($startt+5);$length=($endt-$startt-5);
+assign $infoa=call strstr $haystack=$data; $needle=[/info]; $before_needle=1;
+assign $infob=call strstr $haystack=$infoa; $needle=[info]; $before_needle=0;
+assign $info=call str_replace $subject=$infob;$search=[info];$replace=;
+assign $sinfoa=call str_replace $subject=$info;$search=<br />;$replace=.;
+assign $sinfoa=call str_replace $subject=$info;$search=<br/>;$replace=.;
+assign $sinfoa=call str_replace $subject=$info;$search=<br>;$replace=.;
+assign $sinfo=call substr $val=$sinfoa;$start=0;$length=50;
+var $mt = call substr $val=$info;$start=0;$length=50;
+var $idc = call substr $val=$getname;$start=-1;$length=1
+
+
+
+var $mt = call strrpos $haystack=$mt;$needle=$spc;$offset=0;
+var $mt = call substr $val=$info;$start=0;$length=$mt;
+include /xtscript/bbcode.xt var $mota = call @bbcode $text=$mt
+var $mota = call strip_tags $val=$mota;
+
+
+if $endi > ($starti+13)
+var $img = call substr $val=$data; $start=($starti+5); $length=($endi-$starti-5);
+else
+var $img=http://baonews.wap.sh/images/thumb-medium.png
+endif
+
+var $list = call str_replace $subject=$list;$search=~dau~$getname</a>~cuoi~;$replace= $rename</a>;
+var $list = call str_replace $subject=$list; $search=~img[$getname]~; $replace=$img;
+var $list = call str_replace $subject=$list; $search=~des[$getname]~; $replace=$mota...;
+var $list = call str_replace $subject=$list; $search=title[$getname]; $replace=$rename
+
+if $start > 25
+goto @batdau
+endif
+get __filelist_page
+if $__filelist_page ==
+var $__filelist_page = 1
+endif
+print $list
+endfunction

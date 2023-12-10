@@ -1,0 +1,54 @@
+#exportable
+function bbcode $text=;
+@img
+assign $endi = call strrpos $haystack=$text; $needle=[/img]; $offset=0
+assign $starti = call strrpos $haystack=$text; $needle=[img]; $offset=0
+var $img = call substr $val=$text; $start=($starti+5); $length=($endi-$starti-5)
+var $text = call str_ireplace $subject=$text;$search=[img]$img[/img];$replace=<center><img id="QDK" src="$img" alt="" title="$ten"/><br/><a href="$img" title="Tải ảnh">̉[ten]$ten[/ten]</a></center>
+if $starti > 20
+goto @img
+endif
+@img
+assign $endi = call strrpos $haystack=$text; $needle=[/img]; $offset=0
+assign $starti = call strrpos $haystack=$text; $needle=[img]; $offset=0
+var $img = call substr $val=$text; $start=($starti+5); $length=($endi-$starti-5)
+var $text = call str_ireplace $subject=$text;$search=[img]$img[/img];$replace=<center><img id="QDK" src="$img" alt="title" title="title"/><br/>»<a href="$img" title="Tải ảnh">Mở Images</a>«</center>
+if $starti > 20
+goto @img
+endif
+var $text = call str_ireplace $subject=$text;$search=[text];$replace=<textarea cols="20" rows="3">
+var $text = call str_ireplace $subject=$text;$search=[/text];$replace=</textarea>
+var $text = call str_ireplace $subject=$text;$search=[b];$replace=<b>
+var $text = call str_ireplace $subject=$text;$search=[/b];$replace=</b>
+var $text = call str_ireplace $subject=$text;$search=[u];$replace=<u>
+var $text = call str_ireplace $subject=$text;$search=[/u];$replace=</u>
+var $text = call str_ireplace $subject=$text;$search=[i];$replace=<i>
+var $text = call str_ireplace $subject=$text;$search=[/i];$replace=</i>
+var $text = call str_ireplace $subject=$text; $search=[p]; $replace=<p>
+var $text = call str_ireplace $subject=$text; $search=[/p]; $replace=</p>
+var $text = call str_ireplace $subject=$text; $search=[center]; $replace=<center>
+var $text = call str_ireplace $subject=$text; $search=[/center]; $replace=</center>
+var $text = call str_ireplace $subject=$text; $search=[ten]; $replace=<center><b>
+var $text = call str_ireplace $subject=$text; $search=[/ten]; $replace=</b></center>
+var $text = call str_ireplace $subject=$text;$search=[quote];$replace=<div class="quote">
+var $text = call str_ireplace $subject=$text;$search=[/quote];$replace=</div>
+var $text = call str_ireplace $subject=$text;$search=[dow];$replace=<div class="download">DOWNLOAD</div>
+var $text = call str_ireplace $subject=$text;$search=[tai];$replace=<div class="download">DOWNLOAD</div>.
+var $text = call str_ireplace $subject=$text;$search=[/tai];$replace=</div>
+
+var $text = call str_ireplace $subject=$text;$search=[url=;$replace=<b><big><a target="_blank" href="
+var $text = call str_ireplace $subject=$text;$search=[/url];$replace=</a></big></b>
+var $text = call str_ireplace $subject=$text; $search=[red]; $replace=<font color=red>
+var $text = call str_ireplace $subject=$text; $search=[/red]; $replace=</font>
+var $text = call str_ireplace $subject=$text; $search=[blue]; $replace=<font color=blue>
+var $text = call str_ireplace $subject=$text; $search=[/blue]; $replace=</font>
+var $text = call str_ireplace $subject=$text; $search=[green]; $replace=<font color=green>
+var $text = call str_ireplace $subject=$text; $search=[/green]; $replace=</font>
+var $text = call str_ireplace $subject=$text; $search=[color=; $replace=<font color=blue>
+var $text = call str_ireplace $subject=$text; $search=[/color]; $replace=</font>
+var $text = call str_ireplace $subject=$text;$search=];$replace=">
+var $text = call str_ireplace $subject=$text;$search=:D;$replace=<img src="http://xtboard.com/tpl_resources/xhtml/images/smilies/biggrin_mini2.gif"/>
+var $text = call str_ireplace $subject=$text;$search=:21;$replace=<img src="http://xtboard.com/tpl_resources/xhtml/images/smilies/laugh_mini.gif"/>
+var $text = call str_ireplace $subject=$text;$search=:));$replace=<img src="http://xtboard.com/tpl_resources/xhtml/images/smilies/laugh_mini2.gif"/>
+return $text
+endfunction

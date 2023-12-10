@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Yews - tin tức cộng đồng công nghệ thông tin - news ict computer,mobile</title>
+</head>
+<body><xt:content><h1>Yews.Wap.Sh</h1></xt:content><br />
+    
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html><html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!--parser:xtscript-->
+get id
+var $nd = call source $file=/data/$id;$nl2br=1
+assign $st=call strrpos $haystack=$nd;$needle=[ten]; $offset=0
+assign $et=call strrpos $haystack=$nd;$needle=[/ten]; $offset=0
+var $ten = call substr $val=$nd;$start=($st+5);$length=($et-$st-5);
+assign $si=call strrpos $haystack=$nd;$needle=[info]; $offset=0
+assign $ei=call strrpos $haystack=$nd;$needle=[/info]; $offset=0
+var $info = call substr $val=$nd;$start=($si+6);$length=($ei-$si-6);
+include /xtscript/bbcode.xt
+var $info = call @bbcode $text=$info
+var $mota = call strip_tags $val=$info
+var $mota = call substr $val=$mota;$start=0;$length=20;
+var $mota = call htmlspecialchars $val=$mota
+var $key = call htmlspecialchars $val=$ten
+var $idc = call substr $val=$id;$start=-1;$length=1
+var $cm = call source $file=/muc/$idc
+get p
+if $p !=
+var $trang = Trang $p -
+endif
+print <meta content="$mota" name="description" /><meta content="BaoNEWS,$cm,$key" name="keywords" /><title>$trang $ten - $cm</title>
+<!--/parser:xtscript--> </head>
+
+<body>
+
+
+
+  
+        <!--parser:xtscript-->
+include /xtscript/page.xt
+call @page $noidung=$info
+  <!--/parser:xtscript-->
+    <!--parser:xtscript-->
+  var $list = <xt:filelist sort_type="updated" sort_dir="desc" per_page="30" folder="/files/{_$id}" template="&lt;div class=&quot;quote&quot;&gt;&lt;img src=&quot;http://open3s.wap.sh/Images/dl.gif&quot;&gt; &lt;a href=&quot;.file_url.&quot;&gt;.file_name.&lt;/a&gt; (.file_size.)&lt;/div&gt;" filter="*.jar" />
+if $list >= 1
+print <div class="title border_orange"><a href="#up" name="down" id="down"><font color=white>↑↑</font></a> Tập tin bài viết (.jar)</div>$list
+endif
+<!--/parser:xtscript-->
+<!--parser:xtscript-->
+ var $list = <xt:filelist sort_type="updated" sort_dir="desc" per_page="10" folder="/files/{_$id}" template="&lt;div class=&quot;quote&quot;&gt;&lt;img src=&quot;http://open3s.wap.sh/Images/dl.gif&quot;&gt; &lt;a href=&quot;.file_url.&quot;&gt;.file_name.&lt;/a&gt; (.file_size.)&lt;/div&gt;" filter="*.mp3" />
+if $list >= 1
+  print <div class="phdr"><a href="#up" name="down" id="down"><b><font color=white>↑↑</font></b></a> Tập tin bài viết (.mp3)</div>$list
+endif
+<!--/parser:xtscript-->
+  <!--parser:xtscript-->
+ var $list = <xt:filelist sort_type="updated" sort_dir="desc" per_page="10" folder="/files/{_$id}" template="&lt;div class=&quot;quote&quot;&gt;&lt;img src=&quot;http://open3s.wap.sh/Images/dl.gif&quot;&gt; &lt;a href=&quot;.file_url.&quot;&gt;.file_name.&lt;/a&gt; (.file_size.)&lt;/div&gt;" filter="*.nth" />
+if $list >= 1
+  print <div class="phdr"><a href="#up" name="down" id="down"><b><font color=white>↑↑</font></b></a> Tập tin bài viết (.nth)</div>$list
+endif
+<!--/parser:xtscript-->
+   <!--parser:xtscript-->
+ var $list = <xt:filelist sort_type="updated" sort_dir="desc" per_page="10" folder="/files/{_$id}" template="&lt;div class=&quot;quote&quot;&gt;&lt;img src=&quot;http://open3s.wap.sh/Images/dl.gif&quot;&gt; &lt;a href=&quot;.file_url.&quot;&gt;.file_name.&lt;/a&gt; (.file_size.)&lt;/div&gt;" filter="*.js" />
+if $list >= 1
+  print <div class="phdr"><a href="#up" name="down" id="down"><b><font color=white>↑↑</font></b></a> Tập tin bài viết (.js)</div>$list
+endif
+<!--/parser:xtscript-->
+    
+  
+  
+  <!--parser:xtscript-->
+print <div class="list1"><span style="color:#0052cc">Link:<form method="post"><input type="text" value="<xt:url/ />"/></form><xt:text>BBCode:</xt:text><form method="post"><input type="text" value="[url=<xt:url />]$ten[/url]"/></form></span></b></div>
+<!--/parser:xtscript-->
+ 
+</body>
+</html>
